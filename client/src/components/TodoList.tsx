@@ -38,8 +38,9 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onChange, deleteItem }) => {
             </p>
           </div>
           <ul className="pt-5">
-            {todos.map((item) => (
+            {todos.map((item,i) => (
               <Item
+                key={i}
                 deleteItem={() => deleteItem(item.id)}
                 onEditCompleted={updateItemValue}
                 todoItem={item}

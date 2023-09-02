@@ -34,7 +34,6 @@ const Item: React.FC<ItemProps> = ({
 
   return (
     <li
-      key={item.id}
       className="flex flex-row items-start justify-between py-2.5"
     >
       <div className="flex justify-between">
