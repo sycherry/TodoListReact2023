@@ -1,41 +1,79 @@
-import React, { useEffect } from 'react';
-import './App.css';
-import axios from "axios"
+import { useState, useEffect } from "react";
+import axios from "axios";
+import TodoList from "./components/TodoList";
+import { Todo } from "./components/model";
+import InputPanel from "./components/InputPanel";
+import { baseURL } from "./components/constants";
+import Title from "./components/Title";
 
 function App() {
-
-  const baseURL = 'http://localhost:3020'
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [addInputValue, setAddInputValue] = useState("");
 
   useEffect(() => {
     (async () => {
       try {
-        const todoList = await axios.get(`${baseURL}/api`)
-        console.log("todoList data", todoList.data)
-        return todoList.data
+        // fetching todo list
+        const todoList = await axios.get(`${baseURL}/api`);
+        setTodos(todoList.data);
       } catch (error) {
-        console.error("error fetching todo list", error)
-        throw error
+        console.error("error fetching todo list", error);
       }
     })();
-  }, [])
+  }, []);
 
-  const createTodo = async () => {
+  const deleteTodo = async (id: string) => {
     try {
-
-      const article = {
-        title: "Fifth Item",
-        id: "561287347_33983372"
-      }
-      const response = await axios.post(`${baseURL}/create`, article) 
-      console.log("response",response.data)
+      // delete todo
+      await axios.delete(`${baseURL}/delete`, {
+        params: { id },
+      });
+      setTodos(todos.filter((todo) => todo.id !== id));
     } catch (err) {
-      console.error("login error", err);
+      console.error("error delete todo", err);
     }
   };
 
+  const createTodo = async () => {
+    const generateId = () => {
+      return (
+        Date.now().toString() +
+        "_" +
+        (Math.random() * 1e6).toFixed(0).toString()
+      );
+    };
+    try {
+      const newTodo: Todo = {
+        title: addInputValue,
+        id: generateId(),
+        isDone: false,
+        isEditing: false,
+      };
+      // create todo
+      const response = await axios.post(`${baseURL}/create`, newTodo);
+      setTodos(response.data);
+    } catch (err) {
+      console.error("error create todo", err);
+    }
+  };
+
+  const onTodosChange = (items: Todo[]) => {
+    setTodos(items);
+  };
+
   return (
-    <div className="App">
-     <button onClick={createTodo}>Todo list</button>
+    <div className="max-w-xl mx-auto py-20">
+      <Title />
+      <TodoList
+        onChange={onTodosChange}
+        deleteItem={(id) => deleteTodo(id)}
+        todos={todos}
+      />
+      <InputPanel
+        addInputValue={addInputValue}
+        setAddInputValue={setAddInputValue}
+        createTodo={createTodo}
+      />
     </div>
   );
 }
