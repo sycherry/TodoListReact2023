@@ -24,12 +24,17 @@ const Item: React.FC<ItemProps> = ({
   };
 
   const onFinishedEditing = (item: Todo) => {
-    onEditCompleted(item);
-    setItem({ ...item, isEditing: !item.isEditing });
+    const updatedItem = { ...item, isEditing: !item.isEditing };
+    console.log('Item onFinishedEditing', updatedItem);
+    setItem(updatedItem);
+    onEditCompleted(updatedItem);
   };
 
-  const onCompleted = () => {
-    setItem({ ...item, isDone: !item.isDone });
+  const onCompleted = (item: Todo) => {
+    const updatedItem = { ...item, isDone: !item.isDone };
+    console.log('Item onCompleted', updatedItem);
+    setItem(updatedItem);
+    onEditCompleted(updatedItem);
   };
 
   return (
@@ -42,7 +47,7 @@ const Item: React.FC<ItemProps> = ({
             <button
               type="button"
               className="transition duration-300 ease-in-out"
-              onClick={() => onCompleted()}
+              onClick={() => onCompleted(item)}
             >
               <PiCheckSquareLight
                 className="inline mr-1.5 text-gray-600"
@@ -53,7 +58,7 @@ const Item: React.FC<ItemProps> = ({
             <button
               type="button"
               className="transition duration-300 ease-in-out"
-              onClick={() => onCompleted()}
+              onClick={() => onCompleted(item)}
             >
               <PiSquareLight
                 className="inline mr-1.5 text-gray-600"

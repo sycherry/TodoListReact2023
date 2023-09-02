@@ -10,15 +10,19 @@ function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [addInputValue, setAddInputValue] = useState("");
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     (async () => {
       try {
         // fetching todo list
-        const todoList = await axios.get(`${baseURL}/api`);
-        setTodos(todoList.data);
+        const response = await axios.get(`${baseURL}/api`);
+        console.log("response.data", response.data);
+        setTodos(response.data);
       } catch (error) {
         console.error("error fetching todo list", error);
       }
+      setIsLoading(false);
     })();
   }, []);
 
@@ -64,16 +68,22 @@ function App() {
   return (
     <div className="max-w-xl mx-auto py-20">
       <Title />
-      <TodoList
-        onChange={onTodosChange}
-        deleteItem={(id) => deleteTodo(id)}
-        todos={todos}
-      />
-      <InputPanel
-        addInputValue={addInputValue}
-        setAddInputValue={setAddInputValue}
-        createTodo={createTodo}
-      />
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <TodoList
+            onChange={onTodosChange}
+            deleteItem={(id) => deleteTodo(id)}
+            todos={todos}
+          />
+          <InputPanel
+            addInputValue={addInputValue}
+            setAddInputValue={setAddInputValue}
+            createTodo={createTodo}
+          />
+        </>
+      )}
     </div>
   );
 }
