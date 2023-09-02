@@ -16,12 +16,10 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onChange, deleteItem }) => {
     if (selectedCategory === "active") {
       const newPosts = todos.filter((e) => e.isDone === false);
       setFilteredItems(newPosts);
-      console.log("newPosts active", newPosts);
     }
     if (selectedCategory === "completed") {
       const newPosts = todos.filter((e) => e.isDone === true);
       setFilteredItems(newPosts);
-      console.log("newPosts completed", newPosts);
     }
     if (selectedCategory === "all") {
       setFilteredItems(todos);

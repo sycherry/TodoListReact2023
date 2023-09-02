@@ -19,28 +19,23 @@ const Item: React.FC<ItemProps> = ({
   }, [todoItem]);
 
   const onEditing = () => {
-    console.log("onClick happened");
     setItem({ ...item, isEditing: !item.isEditing });
   };
 
   const onFinishedEditing = (item: Todo) => {
     const updatedItem = { ...item, isEditing: !item.isEditing };
-    console.log('Item onFinishedEditing', updatedItem);
     setItem(updatedItem);
     onEditCompleted(updatedItem);
   };
 
   const onCompleted = (item: Todo) => {
     const updatedItem = { ...item, isDone: !item.isDone };
-    console.log('Item onCompleted', updatedItem);
     setItem(updatedItem);
     onEditCompleted(updatedItem);
   };
 
   return (
-    <li
-      className="flex flex-row items-start justify-between py-2.5"
-    >
+    <li className="flex flex-row items-start justify-between py-2.5">
       <div className="flex justify-between">
         <div>
           {item.isDone ? (
@@ -78,7 +73,6 @@ const Item: React.FC<ItemProps> = ({
               className="w-full rounded-lg border border-gray-600 px-2 py-1 focus: outline-none"
               value={item.title}
               onChange={(evt) => {
-                console.log("onchange happened");
                 setItem({ ...item, title: evt.target.value });
               }}
             />

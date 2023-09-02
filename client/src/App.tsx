@@ -17,7 +17,6 @@ function App() {
       try {
         // fetching todo list
         const response = await axios.get(`${baseURL}/api`);
-        console.log("response.data", response.data);
         setTodos(response.data);
       } catch (error) {
         console.error("error fetching todo list", error);
