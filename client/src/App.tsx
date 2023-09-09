@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TodoList from "./components/todo-list/TodoList";
 import { Todo } from "./models/model";
 import InputPanel from "./components/input-panel/InputPanel";
 import { baseURL } from "./constants";
 import Title from "./components/title/Title";
+import Loading from "./components/loading/Loading";
 
-function App() {
+const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [addInputValue, setAddInputValue] = useState("");
 
@@ -68,7 +69,7 @@ function App() {
     <div className="max-w-xl mx-auto py-20">
       <Title />
       {isLoading ? (
-        <div>Loading...</div>
+        <Loading/>
       ) : (
         <>
           <TodoList
@@ -85,6 +86,5 @@ function App() {
       )}
     </div>
   );
-}
-
-export default App;
+      }
+  export default App;
