@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Todo } from "./model";
+import { Todo } from "../../models/model";
 import axios from "axios";
-import Item from "./Item";
+import Item from "../item/Item";
 import { TodoListProps } from "./TodoListProps";
-import { baseURL } from "./constants";
+import { baseURL } from "../../constants";
 
 const TodoList: React.FC<TodoListProps> = ({ todos, onChange, deleteItem }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");

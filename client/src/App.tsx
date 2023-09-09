@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import TodoList from "./components/TodoList";
-import { Todo } from "./components/model";
-import InputPanel from "./components/InputPanel";
-import { baseURL } from "./components/constants";
-import Title from "./components/Title";
+import TodoList from "./components/todo-list/TodoList";
+import { Todo } from "./models/model";
+import InputPanel from "./components/input-panel/InputPanel";
+import { baseURL } from "./constants";
+import Title from "./components/title/Title";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);

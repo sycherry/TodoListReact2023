@@ -1,7 +1,7 @@
 import React from "react";
 import { InputPanelProps } from "./InputPanelProps";
-import Button from "./Button";
-import Input from "./Input";
+import Button from "../button/Button";
+import Input from "../input/Input";
 
 const InputPanel: React.FC<InputPanelProps> = ({
   setAddInputValue,

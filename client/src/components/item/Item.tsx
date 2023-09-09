@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Todo } from "./model";
+import { Todo } from "../../models/model";
 import { PiSquareLight, PiCheckSquareLight } from "react-icons/pi";
 import {
   HiOutlineCheck,
