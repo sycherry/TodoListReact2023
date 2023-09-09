@@ -1,5 +1,5 @@
 import React from "react";
-import { InputPanelProps } from "./InputPanelProps";
+import { InputPanelProps } from "./InputPanel.props";
 import Button from "../button/Button";
 import Input from "../input/Input";
 

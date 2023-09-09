@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Todo } from "../../models/model";
+import { Todo } from "../../models/Todo";
 import axios from "axios";
 import Item from "../item/Item";
-import { TodoListProps } from "./TodoListProps";
+import { TodoListProps } from "./TodoList.props";
 import { baseURL } from "../../constants";
 
 const TodoList: React.FC<TodoListProps> = ({ todos, onChange, deleteItem }) => {

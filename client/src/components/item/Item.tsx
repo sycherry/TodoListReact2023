@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Todo } from "../../models/model";
+import { Todo } from "../../models/Todo";
 import { PiSquareLight, PiCheckSquareLight } from "react-icons/pi";
 import {
   HiOutlineCheck,
   HiOutlinePencil,
   HiOutlineTrash,
 } from "react-icons/hi";
-import { ItemProps } from "./ItemProps";
+import { ItemProps } from "./Item.props";
 
 const Item: React.FC<ItemProps> = ({
   todoItem,

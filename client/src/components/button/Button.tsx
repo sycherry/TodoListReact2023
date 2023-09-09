@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonProps } from "./ButtonProps";
+import { ButtonProps } from "./Button.props";
 
 const Button: React.FC<ButtonProps> = ({ createTodo }) => {
   return (

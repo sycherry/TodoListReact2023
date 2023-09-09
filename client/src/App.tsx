@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TodoList from "./components/todo-list/TodoList";
-import { Todo } from "./models/model";
+import { Todo } from "./models/Todo";
 import InputPanel from "./components/input-panel/InputPanel";
 import { baseURL } from "./constants";
 import Title from "./components/title/Title";
@@ -10,7 +10,6 @@ import Loading from "./components/loading/Loading";
 const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [addInputValue, setAddInputValue] = useState("");
-
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

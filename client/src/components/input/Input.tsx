@@ -1,5 +1,5 @@
 import React from "react";
-import { InputProps } from "./InputProps";
+import { InputProps } from "./Input.props";
 
 const Input: React.FC<InputProps> = ({ addInputValue, setAddInputValue }) => {
   return (
