@@ -31,7 +31,7 @@ Simple todo list utilizing React and Express to design and create a simple mobil
 - Users can filter a todo item
 
 <p>My Todo screen</p>
-<img src="/public/top.jpg" alt="My Todo screen" width="300" height="auto"/>
+<img src="top.jpg" alt="My Todo screen" width="300" height="auto"/>
 <p>Add a todo item</p>
 <img src="/public/add.jpg" alt="Add a todo item" width="300" height="auto"/>
 <p>Edit a todo item</p>
