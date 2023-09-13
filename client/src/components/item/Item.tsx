@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Todo } from "../../models/Todo";
-import { PiSquareLight, PiCheckSquareLight } from "react-icons/pi";
-import {
-  HiOutlineCheck,
-  HiOutlinePencil,
-  HiOutlineTrash,
-} from "react-icons/hi";
 import { ItemProps } from "./Item.props";
+import CheckBox from "./check-box/CheckBox";
+import TodoInput from "./todo-input/TodoInput";
+import DeleteButton from "./delete-button/DeleteButton";
+import EditButton from "./edit-button/EditButton";
 
 const Item: React.FC<ItemProps> = ({
   todoItem,
@@ -35,90 +33,18 @@ const Item: React.FC<ItemProps> = ({
   };
 
   return (
-    <li className="flex flex-row items-start justify-between py-2.5">
-      <div className="flex justify-between">
-        <div>
-          {item.isDone ? (
-            <button
-              type="button"
-              className="transition duration-300 ease-in-out"
-              onClick={() => onCompleted(item)}
-            >
-              <PiCheckSquareLight
-                className="inline mr-1.5 text-gray-600"
-                size={28}
-              />
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="transition duration-300 ease-in-out"
-              onClick={() => onCompleted(item)}
-            >
-              <PiSquareLight
-                className="inline mr-1.5 text-gray-600"
-                size={28}
-              />
-            </button>
-          )}
-        </div>
-
-        <div
-          className={`${
-            item.isDone ? "text-gray-600" : "text-indigo-600"
-          } hover:text-indigo-400 inline transition duration-300 ease-in-out text-base md:text-lg font-medium`}
-        >
-          {item.isEditing ? (
-            <input
-              className="w-full rounded-lg border border-gray-600 px-2 py-1 focus: outline-none"
-              value={item.title}
-              onChange={(evt) => {
-                setItem({ ...item, title: evt.target.value });
-              }}
-            />
-          ) : (
-            <p className={item.isDone ? "line-through" : "no-underline"}>
-              {item.title}
-            </p>
-          )}
-        </div>
+    <li className="flex justify-between py-4">
+      <div className="flex items-center">
+        <CheckBox item={item} onCompleted={onCompleted} />
+        <TodoInput item={item} setItem={setItem} />
       </div>
-
-      <div className="flex flex-row items-center gap-x-4">
-        <button
-          type="button"
-          className="transition duration-300 ease-in-out"
-          onClick={() => deleteItem(item.id)}
-        >
-          <HiOutlineTrash
-            className="text-gray-600 transition duration-300 ease-in-out rounded-full hover:text-red-500"
-            size={20}
-          />
-        </button>
-
-        {item.isEditing ? (
-          <button
-            type="button"
-            className="transition duration-300 ease-in-out"
-            onClick={() => onFinishedEditing(item)}
-          >
-            <HiOutlineCheck
-              className="text-gray-600 transition duration-300 ease-in-out rounded-full hover:text-red-500"
-              size={20}
-            />
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="transition duration-300 ease-in-out"
-            onClick={() => onEditing()}
-          >
-            <HiOutlinePencil
-              className="text-gray-600 transition duration-300 ease-in-out rounded-full hover:text-red-500"
-              size={20}
-            />
-          </button>
-        )}
+      <div className="flex gap-x-4">
+        <DeleteButton deleteItem={deleteItem} item={item} />
+        <EditButton
+          item={item}
+          onFinishedEditing={onFinishedEditing}
+          onEditing={onEditing}
+        />
       </div>
     </li>
   );

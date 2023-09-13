@@ -4,6 +4,8 @@ import axios from "axios";
 import Item from "../item/Item";
 import { TodoListProps } from "./TodoList.props";
 import { baseURL } from "../../constants";
+import Category from "../category/Category";
+import SubTitle from "../sub-title/SubTitile";
 
 const TodoList: React.FC<TodoListProps> = ({ todos, onChange, deleteItem }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -41,44 +43,8 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onChange, deleteItem }) => {
 
   return (
     <div className="pt-8 pb-12">
-      <div>
-        <div className="flex items-center justify-between">
-          <h2 className="text-base font-medium text-gray-600">Your list</h2>
-          <p className="text-sm font-light text-gray-500">
-            {filteredItems.length} item{filteredItems.length > 1 && "s"}
-          </p>
-        </div>
-
-        <ul className="flex items-center">
-          <p className="py-2 mr-4">Filter:</p>
-          <li>
-            {" "}
-            <button
-              className="inline-flex items-center rounded-xl bg-gray-50 px-2 py-1 mr-4 border hover:bg-gray-100"
-              onClick={() => filterCategory("all")}
-            >
-              All task
-            </button>
-          </li>
-          <li>
-            {" "}
-            <button
-              className="inline-flex items-center rounded-xl bg-gray-50 px-2 py-1 mr-4 border hover:bg-gray-100"
-              onClick={() => filterCategory("active")}
-            >
-              Active task
-            </button>
-          </li>
-          <li>
-            {" "}
-            <button
-              className="inline-flex items-center rounded-xl bg-gray-50 px-2 py-1 border hover:bg-gray-100"
-              onClick={() => filterCategory("completed")}
-            >
-              Completed task
-            </button>
-          </li>
-        </ul>
+        <SubTitle filteredItems={filteredItems} />
+        <Category filterCategory={filterCategory} />
         <ul className="pt-5">
           {filteredItems.map((item, i) => (
             <Item
@@ -89,7 +55,6 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onChange, deleteItem }) => {
             />
           ))}
         </ul>
-      </div>
     </div>
   );
 };

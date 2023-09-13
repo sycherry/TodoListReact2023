@@ -4,7 +4,9 @@ import { InputProps } from "./Input.props";
 const Input: React.FC<InputProps> = ({ addInputValue, setAddInputValue }) => {
   return (
     <input
-      className="w-full rounded-lg border border-gray-600 px-2 py-1 focus: outline-none"
+      className="bg-white focus:outline-none focus:shadow-outline 
+      border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none 
+      leading-normal focus: outline-none min-w-0"
       type="text"
       placeholder="Add Todo..."
       value={addInputValue}

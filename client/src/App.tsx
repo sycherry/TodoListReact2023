@@ -6,11 +6,17 @@ import InputPanel from "./components/input-panel/InputPanel";
 import { baseURL } from "./constants";
 import Title from "./components/title/Title";
 import Loading from "./components/loading/Loading";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [addInputValue, setAddInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [modal, setModal] = useState<boolean>(false);
+
+  const showModal = () => {
+    setModal(true);
+  };
 
   useEffect(() => {
     (async () => {
@@ -55,6 +61,7 @@ const App: React.FC = () => {
       // create todo
       const response = await axios.post(`${baseURL}/create`, newTodo);
       setTodos(response.data);
+      setAddInputValue("");
     } catch (err) {
       console.error("error create todo", err);
     }
@@ -65,25 +72,41 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto py-20">
+    <div className="max-w-xl mx-auto py-20 bg-Zinc-50">
       <Title />
       {isLoading ? (
-        <Loading/>
+        <Loading />
       ) : (
         <>
+          {modal && (
+            <InputPanel
+              addInputValue={addInputValue}
+              setAddInputValue={setAddInputValue}
+              createTodo={createTodo}
+              setModal={setModal}
+            />
+          )}
           <TodoList
             onChange={onTodosChange}
             deleteItem={(id) => deleteTodo(id)}
             todos={todos}
           />
-          <InputPanel
-            addInputValue={addInputValue}
-            setAddInputValue={setAddInputValue}
-            createTodo={createTodo}
-          />
+
+          <button
+            onClick={showModal}
+            className="group fixed bottom-12 right-12 p-0 
+            w-16 h-16 bg-sky-200 
+                rounded-full hover:bg-sky-500 
+                mouse shadow focus:outline-none"
+          >
+            <AiOutlinePlus
+              className="group-hover:text-white inline-block"
+              size={24}
+            />
+          </button>
         </>
       )}
     </div>
   );
-      }
-  export default App;
+};
+export default App;
